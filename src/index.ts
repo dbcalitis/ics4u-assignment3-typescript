@@ -53,7 +53,7 @@ console.log()
 
 const invalidTriangle = new Triangle(123, 10, 25)
 
-console.log('Triangle 4:')
+console.log('Triangle 5:')
 console.log('Name: ' + String(invalidTriangle.getName()))
 console.log('Perimeter: ' + String(invalidTriangle.getPerimeter()))
 console.log('Area: ' + String(invalidTriangle.getArea()))
@@ -64,7 +64,7 @@ console.log()
 
 const invalidTriangle2 = new Triangle(-1, 9, 5)
 
-console.log('Triangle 4:')
+console.log('Triangle 6:')
 console.log('Name: ' + String(invalidTriangle2.getName()))
 console.log('Perimeter: ' + String(invalidTriangle2.getPerimeter()))
 console.log('Area: ' + String(invalidTriangle2.getArea()))
