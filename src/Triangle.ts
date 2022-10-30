@@ -62,7 +62,9 @@ class Triangle {
     // checks if any of the sides are not negative.
     if (!(Math.min(...sides) < 0)) {
       const sides = [this.side1, this.side2, this.side3]
-      sides.sort(function(a, b) { return a - b })
+      sides.sort(function (a, b) {
+        return a - b
+      })
       valid = sides[0] + sides[1] > sides[2]
     }
 
@@ -71,18 +73,27 @@ class Triangle {
 
   // getAngles method - returns an array of the 3 angles.
   public angle(angleNumber: number): number {
-    if (this.isValid() && (angleNumber > 0 && angleNumber < 4)) {
+    if (this.isValid() && angleNumber > 0 && angleNumber < 4) {
       // I do not want to redo this, so I will leave the array here.
       const radianAngles = [
-        Math.acos((Math.pow(this.side1, 2) + Math.pow(this.side2, 2) -
-          Math.pow(this.side3, 2)) /
-        (2 * this.side1 * this.side2)),
-        Math.acos((Math.pow(this.side2, 2) + Math.pow(this.side3, 2) -
-          Math.pow(this.side1, 2)) /
-        (2 * this.side2 * this.side3)),
-        Math.acos((Math.pow(this.side3, 2) + Math.pow(this.side1, 2) -
-          Math.pow(this.side2, 2)) /
-        (2 * this.side3 * this.side1))
+        Math.acos(
+          (Math.pow(this.side1, 2) +
+            Math.pow(this.side2, 2) -
+            Math.pow(this.side3, 2)) /
+            (2 * this.side1 * this.side2)
+        ),
+        Math.acos(
+          (Math.pow(this.side2, 2) +
+            Math.pow(this.side3, 2) -
+            Math.pow(this.side1, 2)) /
+            (2 * this.side2 * this.side3)
+        ),
+        Math.acos(
+          (Math.pow(this.side3, 2) +
+            Math.pow(this.side1, 2) -
+            Math.pow(this.side2, 2)) /
+            (2 * this.side3 * this.side1)
+        )
       ]
 
       return radianAngles[angleNumber - 1]
@@ -111,10 +122,7 @@ class Triangle {
     if (this.isValid()) {
       let name = ''
 
-      if (
-        this.side1 === this.side2 &&
-        this.side2 === this.side3
-      ) {
+      if (this.side1 === this.side2 && this.side2 === this.side3) {
         name = 'Equilateral'
       } else if (
         (this.side1 === this.side2 && this.side1 !== this.side3) ||
