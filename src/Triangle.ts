@@ -30,12 +30,32 @@ class Triangle {
     return this.side3
   }
 
-  public getSides(): number[] {
-    return [this.side1, this.side2, this.side3]
+  // perimeter method - returns the sum of all angles.
+  private perimeter(): number {
+    let perimeter
+
+    if (this.isValid()) {
+      perimeter = this.side1 + this.side2 + this.side3
+    } else {
+      perimeter = -1
+    }
+
+    return perimeter
   }
 
-  // isTriangleValid method - determines if the triangle is valid.
-  protected isTriangleValid(): boolean {
+  // semiPerimeter method - returns the half of the triangle's perimeter.
+  public semiPerimeter(): number {
+    let semiPerimeter
+    if (this.isValid()) {
+      semiPerimeter = this.perimeter() / 2
+    } else {
+      semiPerimeter = -1
+    }
+    return semiPerimeter
+  }
+
+  // isValid method - determines if the triangle is valid.
+  public isValid(): boolean {
     let valid = false
     const sides = [this.side1, this.side2, this.side3]
 
@@ -50,8 +70,9 @@ class Triangle {
   }
 
   // getAngles method - returns an array of the 3 angles.
-  public getAngles(): number[] {
-    if (this.isTriangleValid()) {
+  public angle(angleNumber: number): number {
+    if (this.isValid() && (angleNumber > 0 && angleNumber < 4)) {
+      // I do not want to redo this, so I will leave the array here.
       const radianAngles = [
         Math.acos((Math.pow(this.side1, 2) + Math.pow(this.side2, 2) -
           Math.pow(this.side3, 2)) /
@@ -64,23 +85,17 @@ class Triangle {
         (2 * this.side3 * this.side1))
       ]
 
-      const degreeAngles = []
-
-      for (let count = 0; count < radianAngles.length; count++) {
-        degreeAngles.push(Math.round(radianAngles[count] * (180 / Math.PI)))
-      }
-
-      return degreeAngles
+      return radianAngles[angleNumber - 1]
     } else {
-      return [-1]
+      return -1
     }
   }
 
-  // getArea method - returns the area of the triangle.
-  public getArea(): number {
-    if (this.isTriangleValid()) {
+  // area method - returns the area of the triangle.
+  public area(): number {
+    if (this.isValid()) {
       // The semi-perimeter
-      const sp = (this.side1 + this.side2 + this.side3) / 2
+      const sp = this.semiPerimeter()
       const area = Math.sqrt(
         sp * (sp - this.side1) * (sp - this.side2) * (sp - this.side3)
       )
@@ -91,9 +106,9 @@ class Triangle {
     }
   }
 
-  // getName method - returns a name for the triangle.
-  public getName(): string | number {
-    if (this.isTriangleValid()) {
+  // getType method - returns a name for the triangle.
+  public getType(): string {
+    if (this.isValid()) {
       let name = ''
 
       if (
@@ -103,16 +118,17 @@ class Triangle {
         name = 'Equilateral'
       } else if (
         (this.side1 === this.side2 && this.side1 !== this.side3) ||
-        (this.side2 === this.side3 && this.side2 !== this.side3)
+        (this.side2 === this.side3 && this.side2 !== this.side1) ||
+        (this.side3 === this.side1 && this.side3 !== this.side2)
       ) {
         name = 'Isosceles'
       } else {
-        const angles = this.getAngles()
+        const angles = [this.angle(1), this.angle(2), this.angle(3)]
         let rightAngle = false
 
         // checks if one of the angles is 90.
         for (let count = 0; count < angles.length; count++) {
-          if (angles[count] === 90) {
+          if (angles[count] * (180 / Math.PI) === 90) {
             rightAngle = true
             break
           }
@@ -126,19 +142,9 @@ class Triangle {
       }
       return name
     } else {
-      return -1
+      return '-1'
     }
   }
-
-  // getPerimeter method - returns the sum of all 3 sides.
-  public getPerimeter(): number {
-    if (this.isTriangleValid()) {
-      return this.side1 + this.side2 + this.side3
-    } else {
-      return -1
-    }
-  }
-
 }
 
 export = Triangle
