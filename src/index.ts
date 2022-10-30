@@ -58,7 +58,7 @@ console.log(' → Angle 3: ' + testTriangle4.angle(3).toFixed(4) + ' rad')
 console.log('')
 
 const testTriangle5 = new Triangle(23, 4, 6)
-console.log('Created a 23 mm by 3 mm by 4 mm triangle.')
+console.log('Created a 23 mm by 3 mm by 6 mm triangle.')
 console.log(' → Is the triangle valid: ' + testTriangle5.isValid().toString())
 console.log(' → Semiperimeter: ' + testTriangle5.semiPerimeter().toFixed(4) + ' mm')
 console.log(' → Area: ' + testTriangle5.area().toFixed(4) + ' mm²')
